@@ -1,4 +1,5 @@
 import random
+import hangman_ASCII
 
 ###  WORD LIBRARY  ###
 word_list = ["aardvark", "baboon", "camel"]
@@ -10,7 +11,7 @@ chosen_word = random.choice(word_list)
 #### DEBUG ####
 print(chosen_word)
 
-### CREATE '_" PLACEHOLDERS FOR EACH LETTER IN chosen_word  ###
+### CREATE "_" PLACEHOLDERS FOR EACH LETTER IN chosen_word  ###
 display = []
 for letter in chosen_word:
     display.append("_")
@@ -28,7 +29,7 @@ while not end_of_game:
          
     print(display)
     
+### CHECK IF USER WON ###    
     if "_" not in display: 
         end_of_game = True
-        
-print('You Win!')
+        print('You Win!')
