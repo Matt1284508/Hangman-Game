@@ -5,6 +5,7 @@ import hangman_ASCII
 word_list = ["aardvark", "baboon", "camel"]
 
 end_of_game = False
+user_life_counter = 6
 
 ### GENERATE A RANDOM WORD ###
 chosen_word = random.choice(word_list)
@@ -23,12 +24,18 @@ while not end_of_game:
 
 ### CHECK IF guess IS IN chosen_word ###
     for position in range(len(chosen_word)):
-     letter = chosen_word[position]
-     if letter == guess:
-         display[position] = letter
-         
-    print(display)
+        letter = chosen_word[position]
+        if letter == guess:
+            display[position] = letter
+    if guess not in chosen_word:
+        user_life_counter -= 1
+        if user_life_counter == 0: 
+            print("You Lose!")
+            break  
+
+    print(f"{' '.join(display)}")
     
+        
 ### CHECK IF USER WON ###    
     if "_" not in display: 
         end_of_game = True
