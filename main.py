@@ -1,6 +1,6 @@
 import random
 import hangman_ASCII
-import word
+import words
 from os import system, name
 
 end_of_game = False
@@ -15,7 +15,7 @@ print(hangman_ASCII.logo)
 print(hangman_ASCII.stages[user_life_counter])
 
 ### GENERATE A RANDOM WORD ###
-chosen_word = random.choice(word.list)
+chosen_word = random.choice(words.list)
 #### DEBUG ####
 print(chosen_word)
 
