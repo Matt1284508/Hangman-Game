@@ -1,14 +1,16 @@
 import random
 import hangman_ASCII
-
-###  WORD LIBRARY  ###
-word_list = ["aardvark", "baboon", "camel"]
+import word
 
 end_of_game = False
 user_life_counter = 6
+guess_bank = []
+
+print(hangman_ASCII.logo)
+print(hangman_ASCII.stages[user_life_counter])
 
 ### GENERATE A RANDOM WORD ###
-chosen_word = random.choice(word_list)
+chosen_word = random.choice(word.list)
 #### DEBUG ####
 print(chosen_word)
 
@@ -17,23 +19,31 @@ display = []
 for letter in chosen_word:
     display.append("_")
 
+print(f"{' '.join(display)}")
+
 while not end_of_game:
+    
 ### ASK USER TO GUESS LETTER ###
     guess = input("\nPlease Guess a letter: ").lower()
+    
+    if guess in guess_bank:
+        print(f"You have already guessed {guess}!")
+    guess_bank.append(guess)
     
 ### CHECK IF guess IS IN chosen_word ###
     for position in range(len(chosen_word)):
         letter = chosen_word[position]
         if letter == guess:
             display[position] = letter
-    print(hangman_ASCII.stages[user_life_counter])
-
+            print(hangman_ASCII.stages[user_life_counter])
             
     if guess not in chosen_word:
         user_life_counter -= 1
         print(hangman_ASCII.stages[user_life_counter])
+        print(f"{guess} is not in this word.")
+
         if user_life_counter == 0: 
-            print("You Lose!")
+            print(hangman_ASCII.lose)
             break  
 ### PRINT UPDATED LETTER TRAY ###
     print(f"{' '.join(display)}")
@@ -42,5 +52,5 @@ while not end_of_game:
 ### CHECK IF USER WON ###    
     if "_" not in display: 
         end_of_game = True
-        print('\nYou Win!')
+        print(hangman_ASCII.win)
         
