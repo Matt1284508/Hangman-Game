@@ -1,10 +1,15 @@
 import random
 import hangman_ASCII
 import word
+from os import system, name
 
 end_of_game = False
 user_life_counter = 6
 guess_bank = []
+
+def clear():
+    if name == 'nt':
+        _ = system('cls')
 
 print(hangman_ASCII.logo)
 print(hangman_ASCII.stages[user_life_counter])
@@ -25,22 +30,26 @@ while not end_of_game:
     
 ### ASK USER TO GUESS LETTER ###
     guess = input("\nPlease Guess a letter: ").lower()
+    clear()
+    
+    print(hangman_ASCII.logo)
     
     if guess in guess_bank:
         print(f"You have already guessed {guess}!")
-    guess_bank.append(guess)
-    
+
 ### CHECK IF guess IS IN chosen_word ###
     for position in range(len(chosen_word)):
         letter = chosen_word[position]
         if letter == guess:
             display[position] = letter
             print(hangman_ASCII.stages[user_life_counter])
-            
+            guess_bank.append(guess)
+
     if guess not in chosen_word:
         user_life_counter -= 1
         print(hangman_ASCII.stages[user_life_counter])
         print(f"{guess} is not in this word.")
+        guess_bank.append(guess)
 
         if user_life_counter == 0: 
             print(hangman_ASCII.lose)
