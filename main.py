@@ -17,7 +17,7 @@ print(hangman_ASCII.stages[user_life_counter])
 ### GENERATE A RANDOM WORD ###
 chosen_word = random.choice(words.list)
 #### DEBUG ####
-print(chosen_word)
+#print(chosen_word)
 
 ### CREATE "_" PLACEHOLDERS FOR EACH LETTER IN chosen_word  ###
 display = []
